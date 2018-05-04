@@ -1,7 +1,7 @@
 <?php
 
 $username = 'root';
-$password = '';
+$password = 'root';
 $host = '127.0.0.1';
 $dbname = 'blog';
 
@@ -22,12 +22,38 @@ if ($isValid) {
 	$query->execute();
 }
 
+
+
+  
+if (isset($_POST['selectId'])
+	&& $_POST['selectId'] != '') {
+		
+	$selectId = $_POST['selectId'];
+	$catReplace = $_POST['catReplace'];
+
+	$sql_update = "update categories set category='$catReplace' where id='$selectId'";
+	$query = $DB->query($sql_update);
+	$query->execute();
+}
+
+
+if (isset($_POST['id_select'])
+	&& $_POST['id_select'] != '') {
+
+	$id_select = $_POST['id_select'];
+
+	$sql_delete = "delete from categories where id='$id_select'";
+	$query = $DB->query($sql_delete);
+	$query->execute();
+}
+
 $sql_read = "select * from categories";
 $query = $DB->query($sql_read);
 $query->execute();
 
-
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+echo '<br/>';
 
 ?>
 <form action="domasnaCRUD_categories.php" method="post" autocomplete="off">
@@ -44,27 +70,18 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 		<tr>
 			<td><?=$row['id']; ?></td>
 			<td><?=$row['category']; ?></td>
+			<td><?=$row['delete']; ?></td>
 			
 		</tr>
 	<?php } ?>
 </table>
 
-<?php
+<?php 
 echo '<br/>';
 
-//Update Category
-  
-if (isset($_POST['selectId'])
-	&& $_POST['selectId'] != '') {
-		
-	$selectId = $_POST['selectId'];
-	$catReplace = $_POST['catReplace'];
+ ?>
 
-	$sql_update = "update categories set category='$catReplace' where id='$selectId'";
-	$query = $DB->query($sql_update);
-	$query->execute();
-}
-?>
+
 
 <form action="domasnaCRUD_categories.php" method="post" autocomplete="off">
 	<input type="number" name="selectId" placeholder="Select id">
@@ -72,20 +89,7 @@ if (isset($_POST['selectId'])
 	<button type="submit">Update</button>
 </form>
 
-<?php
 
-// Delete Category
-if (isset($_POST['id_select'])
-	&& $_POST['id_select'] != '') {
-
-	$id_select = $_POST['id_select'];
-
-	$sql_delete = "delete from categories where id='$id_select'";
-	$query = $DB->query($sql_delete);
-	$query->execute();
-}
-
-?>
 
 <form action="domasnaCRUD_categories.php" method="post" autocomplete="off">
 	<input type="number" name="id_select" placeholder="Delete files" >
