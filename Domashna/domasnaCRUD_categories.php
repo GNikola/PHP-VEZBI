@@ -30,7 +30,7 @@ $query->execute();
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
-<form action="domasnaCRUD.php" method="post" autocomplete="off">
+<form action="domasnaCRUD_categories.php" method="post" autocomplete="off">
 	<input type="text" name="category" placeholder="category" autocomplete="off">
 	<button type="submit"> Save </button>
 </form>
@@ -66,7 +66,7 @@ if (isset($_POST['selectId'])
 }
 ?>
 
-<form action="domasnaCRUD.php" method="post" autocomplete="off">
+<form action="domasnaCRUD_categories.php" method="post" autocomplete="off">
 	<input type="number" name="selectId" placeholder="Select id">
 	<input type="text" name="catReplace" placeholder="Update category name">
 	<button type="submit">Update</button>
@@ -87,7 +87,7 @@ if (isset($_POST['id_select'])
 
 ?>
 
-<form action="domasnaCRUD.php" method="post" autocomplete="off">
+<form action="domasnaCRUD_categories.php" method="post" autocomplete="off">
 	<input type="number" name="id_select" placeholder="Delete files" >
 	<button type="submit">Delete</button>
 </form>
